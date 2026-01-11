@@ -31,16 +31,48 @@
 package org.see.baseplate.models;
 
 import org.apache.commons.geometry.euclidean.threed.Vector3D;
+import org.apache.commons.numbers.quaternion.Quaternion;
 import org.ejml.simple.SimpleMatrix;
+import org.see.baseplate.encoding.QuaternionCoder;
+import org.see.baseplate.encoding.SpaceTimeCoordinateStateCoder;
+import org.see.baseplate.types.SpaceTimeCoordinateState;
 import org.see.skf.annotations.Attribute;
 import org.see.skf.annotations.ObjectClass;
 import org.see.skf.util.encoding.HLAfloat64LECoder;
 import org.see.skf.runtime.AccessLevel;
 import org.see.baseplate.encoding.SimpleMatrixCoder;
 import org.see.baseplate.encoding.Vector3DCoder;
+import org.see.skf.util.encoding.HLAunicodeStringCoder;
 
-@ObjectClass(name = "HLAobjectRoot.DynamicalEntity")
-public class DynamicalEntity extends PhysicalEntity {
+@ObjectClass(name = "HLAobjectRoot.PhysicalEntity.DynamicalEntity")
+public class DynamicalEntity {
+    @Attribute(name = "name", coder = HLAunicodeStringCoder.class, access = AccessLevel.NONE)
+    private String name;
+
+    @Attribute(name = "type", coder = HLAunicodeStringCoder.class, access = AccessLevel.NONE)
+    private String type;
+
+    @Attribute(name = "status", coder = HLAunicodeStringCoder.class, access = AccessLevel.NONE)
+    private String status;
+
+    @Attribute(name = "parent_reference_frame", coder = HLAunicodeStringCoder.class, access = AccessLevel.NONE)
+    private String parentReferenceFrame;
+
+    @Attribute(name = "state",  coder = SpaceTimeCoordinateStateCoder.class, access = AccessLevel.NONE)
+    private SpaceTimeCoordinateState state;
+
+    @Attribute(name = "acceleration", coder = Vector3DCoder.class, access = AccessLevel.NONE)
+    private Vector3D acceleration;
+
+    @Attribute(name = "rotational_acceleration", coder = Vector3DCoder.class, access = AccessLevel.NONE)
+    private Vector3D rotationalAcceleration;
+
+    @Attribute(name = "center_of_mass", coder = Vector3DCoder.class, access = AccessLevel.NONE)
+    private Vector3D centerOfMass;
+
+    @Attribute(name = "body_wrt_structural", coder = QuaternionCoder.class, access = AccessLevel.NONE)
+    private Quaternion bodyWrtStructural;
+
     @Attribute(name = "force", coder = Vector3DCoder.class, access = AccessLevel.NONE)
     private Vector3D force;
 
@@ -60,12 +92,93 @@ public class DynamicalEntity extends PhysicalEntity {
     private SimpleMatrix inertiaRate;
 
     public DynamicalEntity() {
+        this.name = "";
+        this.type = "";
+        this.status = "";
+        this.parentReferenceFrame = "";
+        this.state = new SpaceTimeCoordinateState();
+        this.acceleration = Vector3D.of(0, 0, 0);
+        this.rotationalAcceleration = Vector3D.of(0, 0, 0);
+        this.centerOfMass = Vector3D.of(0, 0, 0);
+        this.bodyWrtStructural = Quaternion.of(0, 0, 0, 0);
         force = Vector3D.of(0, 0, 0);
         torque = Vector3D.of(0, 0, 0);
         mass = 0.0;
         massRate = 0.0;
         inertia = new SimpleMatrix(3, 3);
         inertiaRate = new SimpleMatrix(3, 3);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getParentReferenceFrame() {
+        return parentReferenceFrame;
+    }
+
+    public void setParentReferenceFrame(String parentReferenceFrame) {
+        this.parentReferenceFrame = parentReferenceFrame;
+    }
+
+    public SpaceTimeCoordinateState getState() {
+        return state;
+    }
+
+    public void setState(SpaceTimeCoordinateState state) {
+        this.state = state;
+    }
+
+    public Vector3D getAcceleration() {
+        return acceleration;
+    }
+
+    public void setAcceleration(Vector3D acceleration) {
+        this.acceleration = acceleration;
+    }
+
+    public Vector3D getRotationalAcceleration() {
+        return rotationalAcceleration;
+    }
+
+    public void setRotationalAcceleration(Vector3D rotationalAcceleration) {
+        this.rotationalAcceleration = rotationalAcceleration;
+    }
+
+    public Vector3D getCenterOfMass() {
+        return centerOfMass;
+    }
+
+    public void setCenterOfMass(Vector3D centerOfMass) {
+        this.centerOfMass = centerOfMass;
+    }
+
+    public Quaternion getBodyWrtStructural() {
+        return bodyWrtStructural;
+    }
+
+    public void setBodyWrtStructural(Quaternion bodyWrtStructural) {
+        this.bodyWrtStructural = bodyWrtStructural;
     }
 
     public Vector3D getForce() {

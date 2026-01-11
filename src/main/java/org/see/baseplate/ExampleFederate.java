@@ -31,6 +31,10 @@
 package org.see.baseplate;
 
 import hla.rti1516_2025.exceptions.*;
+import org.see.baseplate.models.DynamicalEntity;
+import org.see.baseplate.models.PhysicalEntity;
+import org.see.baseplate.models.PhysicalInterface;
+import org.see.baseplate.models.ReferenceFrame;
 import org.see.skf.conf.FederateConfiguration;
 import org.see.skf.core.SEEFederateAmbassador;
 import org.see.skf.core.SEELateJoinerFederate;
