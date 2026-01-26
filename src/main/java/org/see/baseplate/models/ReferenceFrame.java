@@ -32,14 +32,14 @@ package org.see.baseplate.models;
 
 import org.see.skf.annotations.Attribute;
 import org.see.skf.annotations.ObjectClass;
+import org.see.skf.core.PropertyChangeSubject;
 import org.see.skf.util.encoding.HLAunicodeStringCoder;
 import org.see.skf.runtime.AccessLevel;
-import org.see.skf.core.UpdatableObjectInstance;
 import org.see.baseplate.encoding.SpaceTimeCoordinateStateCoder;
 import org.see.baseplate.types.SpaceTimeCoordinateState;
 
 @ObjectClass(name = "HLAobjectRoot.ReferenceFrame")
-public class ReferenceFrame extends UpdatableObjectInstance {
+public class ReferenceFrame extends PropertyChangeSubject {
     @Attribute(name = "name", coder = HLAunicodeStringCoder.class, access = AccessLevel.NONE)
     private String name;
 

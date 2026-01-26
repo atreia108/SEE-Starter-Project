@@ -34,14 +34,14 @@ import org.apache.commons.geometry.euclidean.threed.Vector3D;
 import org.apache.commons.numbers.quaternion.Quaternion;
 import org.see.skf.annotations.Attribute;
 import org.see.skf.annotations.ObjectClass;
+import org.see.skf.core.PropertyChangeSubject;
 import org.see.skf.util.encoding.HLAunicodeStringCoder;
 import org.see.skf.runtime.AccessLevel;
-import org.see.skf.core.UpdatableObjectInstance;
 import org.see.baseplate.encoding.QuaternionCoder;
 import org.see.baseplate.encoding.Vector3DCoder;
 
 @ObjectClass(name = "HLAobjectRoot.PhysicalInterface")
-public class PhysicalInterface extends UpdatableObjectInstance {
+public class PhysicalInterface extends PropertyChangeSubject {
     @Attribute(name = "name", coder = HLAunicodeStringCoder.class, access = AccessLevel.NONE)
     private String name;
 
